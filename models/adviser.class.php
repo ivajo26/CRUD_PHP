@@ -1,5 +1,5 @@
 <?php
-include'db_connection.php';
+require 'db_connection.php';
 
 /**
  * Modelo de Asesores
@@ -18,6 +18,7 @@ class Adviser{
     $sql->bindParam(1, $first_name);
     $sql->bindParam(2, $last_name);
     $sql->execute();
+    return True;
   }
 
   function read_all(){
@@ -40,8 +41,8 @@ class Adviser{
     $sql->bindParam(3, $id);
     $sql->execute();
   }
-  
-  function delete()$id){}
+
+  function delete($id){}
 }
 
 ?>

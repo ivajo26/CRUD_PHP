@@ -1,5 +1,5 @@
 <?php
-include'db_connection.php';
+require 'db_connection.php';
 
 /**
  * Modelo de Autores
@@ -14,20 +14,21 @@ class Author{
   }
 
   function create($first_name, $last_name){
-    $sql = $this->db->prepare("INSERT INTO  adviser (first_name , last_name) VALUES (?,?)");
+    $sql = $this->db->prepare("INSERT INTO  author (first_name , last_name) VALUES (?,?)");
     $sql->bindParam(1, $first_name);
     $sql->bindParam(2, $last_name);
     $sql->execute();
+    return true;
   }
 
   function read_all(){
-    $sql = $this->db->prepare("SELECT * FROM adviser");
+    $sql = $this->db->prepare("SELECT * FROM author");
     $sql->execute();
     return $sql;
   }
 
   function read_for_id($id){
-    $sql = $this->db->prepare("SELECT * FROM adviser WHERE id = ?");
+    $sql = $this->db->prepare("SELECT * FROM author WHERE id = ?");
     $sql->bindParam(1, $id);
     $sql->execute();
     return $sql;
@@ -41,7 +42,7 @@ class Author{
     $sql->execute();
   }
 
-  function delete()$id){}
+  function delete($id){}
 }
 
 ?>

@@ -8,7 +8,7 @@ class DBManager{
   var $Connet;
 
   function DBManager(){
-    require '../config.php';
+    require 'config.php';
     $this->type_db = $type_db;
     $this->user_db = $user_db;
     $this->password_db = $password_db;

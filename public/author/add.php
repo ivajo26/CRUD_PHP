@@ -5,16 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CRUD PHP - Dashboard</title>
 
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/datepicker3.css" rel="stylesheet">
-<link href="css/styles.css" rel="stylesheet">
+<link href="../static/css/bootstrap.min.css" rel="stylesheet">
+<link href="../static/css/datepicker3.css" rel="stylesheet">
+<link href="../static/css/styles.css" rel="stylesheet">
 
 <!--Icons-->
-<script src="js/lumino.glyphs.js"></script>
+<script src="../static/js/lumino.glyphs.js"></script>
 
 <!--[if lt IE 9]>
-<script src="js/html5shiv.js"></script>
-<script src="js/respond.min.js"></script>
+<script src="../static/js/html5shiv.js"></script>
+<script src="../static/js/respond.min.js"></script>
 <![endif]-->
 
 </head>
@@ -49,7 +49,7 @@
   <!-- SIDEBARD -->
   <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<ul class="nav menu">
-			<li class="active"><a href="index.php"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
+			<li class="active"><a href="../index.php"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
 			<li class="parent">
 				<a href="#">
 					<span data-toggle="collapse" href="#projects"><svg class="glyph stroked open folder"><use xlink:href="#stroked-open-folder"></use></svg>Proyectos</span>
@@ -115,7 +115,7 @@
 
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Agregar Asesor</h1>
+				<h1 class="page-header">Agregar Autor</h1>
 			</div>
 		</div><!--/.row-->
 
@@ -125,7 +125,9 @@
 					<div class="panel-heading">Informacion Personal</div>
 					<div class="panel-body">
 						<div class="col-md-12">
-							<form class="form-inline">
+							<div id="respuesta"></div>
+							<div id="alerts"></div>
+							<form class="form-inline" id="author-form">
 								<div class="form-group">
 									<label>Nombre</label>
 									<input class="form-control" placeholder="Nombre" type="text" name="first_name" id="first_name">
@@ -146,13 +148,14 @@
 
 	</div>	<!--/.main-->
 
-	<script src="js/jquery-1.11.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/chart.min.js"></script>
-	<script src="js/chart-data.js"></script>
-	<script src="js/easypiechart.js"></script>
-	<script src="js/easypiechart-data.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="../static/js/jquery-1.11.1.min.js"></script>
+	<script src="../static/js/bootstrap.min.js"></script>
+	<script src="../static/js/chart.min.js"></script>
+	<script src="../static/js/chart-data.js"></script>
+	<script src="../static/js/easypiechart.js"></script>
+	<script src="../static/js/easypiechart-data.js"></script>
+	<script src="../static/js/bootstrap-datepicker.js"></script>
+	<script src="../static/js_views/author.js"></script>
 	<script>
 		$('#calendar').datepicker({
 		});
