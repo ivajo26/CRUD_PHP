@@ -47,7 +47,7 @@
 	</nav>
 
   <!-- SIDEBARD -->
-	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+  <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<ul class="nav menu">
 			<li class="active"><a href="index.php"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
 			<li class="parent">
@@ -115,51 +115,34 @@
 
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Dashboard</h1>
+				<h1 class="page-header">Agregar Autor</h1>
 			</div>
 		</div><!--/.row-->
 
-		<div class="row">
-			<div class="col-xs-12 col-md-6 col-lg-3">
-				<div class="panel panel-blue panel-widget ">
-					<div class="row no-padding">
-						<div class="col-sm-3 col-lg-5 widget-left">
-							<svg class="glyph stroked open folder"><use xlink:href="#stroked-open-folder"></use></svg>
-						</div>
-						<div class="col-sm-9 col-lg-7 widget-right">
-							<div class="large">120</div>
-							<div class="text-muted">Proyectos</div>
-						</div>
+    <div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">Informacion Personal</div>
+					<div class="panel-body">
+						<div class="col-md-12">
+							<form class="form-inline">
+								<div class="form-group">
+									<label>Nombre</label>
+									<input class="form-control" placeholder="Nombre" type="text" name="first_name" id="first_name">
+								</div>
+
+                <div class="form-group">
+									<label>Apellido</label>
+									<input class="form-control" placeholder="Apellido" type="text" name="last_name" id="last_name">
+								</div>
+
+								<button type="submit" class="btn btn-primary">Agregar</button>
+							</div>
+						</form>
 					</div>
 				</div>
-			</div>
-			<div class="col-xs-12 col-md-6 col-lg-3">
-				<div class="panel panel-red panel-widget">
-					<div class="row no-padding">
-						<div class="col-sm-3 col-lg-5 widget-left">
-							<svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg>
-						</div>
-						<div class="col-sm-9 col-lg-7 widget-right">
-							<div class="large">24</div>
-							<div class="text-muted">Autores</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-12 col-md-6 col-lg-3">
-				<div class="panel panel-teal panel-widget">
-					<div class="row no-padding">
-						<div class="col-sm-3 col-lg-5 widget-left">
-							<svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg>
-						</div>
-						<div class="col-sm-9 col-lg-7 widget-right">
-							<div class="large">24</div>
-							<div class="text-muted">Asesores</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div><!--/.row-->
+			</div><!-- /.col-->
+		</div><!-- /.row -->
 
 	</div>	<!--/.main-->
 
