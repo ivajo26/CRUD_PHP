@@ -4,7 +4,7 @@ $( "#adviser-form" ).submit(function(event) {
   // First name valid
   var field = document.getElementById("first_name_adviser");
   field.parentElement.classList.remove("has-error");
-  if((!(/^[A-Za-z\s]+$/.test(field.value))) || field.value.length<=0 ){
+  if((!(/^[A-Za-z\_\-\.\s\xF1\xD1]+$/.test(field.value))) || field.value.length<=0 ){
     document.getElementById("alerts_adviser").innerHTML+='<div class="alert bg-danger" role="alert"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> El campo nombre se encuentra vacio o contiene caracteres invalidos</span></a></div>';
     field.parentElement.classList.add("has-error");
     errors+=1;
@@ -13,7 +13,7 @@ $( "#adviser-form" ).submit(function(event) {
   // Last name valid
   var field = document.getElementById("last_name_adviser");
   field.parentElement.classList.remove("has-error");
-  if((!(/^[A-Za-z\s]+$/.test(field.value))) || field.value.length<=0 ){
+  if((!(/^[A-Za-z\_\-\.\s\xF1\xD1]+$/.test(field.value))) || field.value.length<=0 ){
     document.getElementById("alerts_adviser").innerHTML+='<div class="alert bg-danger" role="alert"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg> El campo apellido se encuentra vacio o contiene caracteres invalidos</span></a></div>';
     field.parentElement.classList.add("has-error");
     errors+=1;
@@ -47,10 +47,11 @@ var $table = $('#table'),
     $update = $('#update');
     $(function () {
       $update.click(function () {
-        var ids = $.map($table.bootstrapTable('getSelections'), function (row) {
-            return row.id;
-        });
-        if(ids > 0) {
+        var data=$table.bootstrapTable('getSelections');
+        if(data.length==1) {
+          document.getElementById("id_adviser").value=data[0].id;
+          document.getElementById("first_name_adviser").value=data[0].first_name;
+          document.getElementById("last_name_adviser").value=data[0].last_name;
           $('#update_modal').modal('show');
         }
       });

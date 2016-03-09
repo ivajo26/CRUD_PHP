@@ -6,6 +6,7 @@ $last_name=$_POST['last_name'];
 
 $author = new Author();
 
+$json = array('status'=> "True" );
 
 if(!ereg("^[A-Za-z\s]+$",$first_name) and !ereg("^[A-Za-z\s]+$",$last_name) ){
   $json = array('status'=> "False" );

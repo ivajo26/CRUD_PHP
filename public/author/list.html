@@ -40,19 +40,19 @@
   <!-- SIDEBARD -->
   <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<ul class="nav menu">
-			<li><a href="../index.php"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
+			<li><a href="../index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
 			<li class="parent">
 				<a href="#">
 					<span data-toggle="collapse" href="#projects"><svg class="glyph stroked open folder"><use xlink:href="#stroked-open-folder"></use></svg>Proyectos</span>
 				</a>
 				<ul class="children collapse" id="projects">
 					<li>
-						<a class="" href="../project/list.php">
+						<a class="" href="../project/list.html">
 							<svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"></use></svg> Listar
 						</a>
 					</li>
 					<li>
-						<a class="" href="../project/add.php">
+						<a class="" href="../project/add.html">
 							<svg class="glyph stroked plus sign"><use xlink:href="#stroked-plus-sign"></use></svg> Agregar
 						</a>
 					</li>
@@ -64,12 +64,12 @@
 				</a>
 				<ul class="children collapse" id="authors">
 					<li>
-						<a class="" href="list.php">
+						<a class="" href="list.html">
 							<svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"></use></svg> Listar
 						</a>
 					</li>
 					<li>
-						<a class="" href="add.php">
+						<a class="" href="add.html">
 							<svg class="glyph stroked plus sign"><use xlink:href="#stroked-plus-sign"></use></svg> Agregar
 						</a>
 					</li>
@@ -81,12 +81,12 @@
 				</a>
 				<ul class="children collapse" id="adviser">
 					<li>
-						<a class="" href="../adviser/list.php">
+						<a class="" href="../adviser/list.html">
 							<svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"></use></svg> Listar
 						</a>
 					</li>
 					<li>
-						<a class="" href="../adviser/add.php">
+						<a class="" href="../adviser/add.html">
 							<svg class="glyph stroked plus sign"><use xlink:href="#stroked-plus-sign"></use></svg> Agregar
 						</a>
 					</li>
@@ -169,7 +169,7 @@
 							<input class="form-control" placeholder="Apellido" type="text" name="last_name" id="last_name_author">
 						</div>
 
-						<input type="numbre" name="id" hidden value="25">
+						<input type="number" name="id" hidden id="id_author">
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -199,9 +199,6 @@
 		$(window).on('resize', function () {
 		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
 		})
-	</script>
-	<script type="text/javascript">
-
 	</script>
 </body>
 

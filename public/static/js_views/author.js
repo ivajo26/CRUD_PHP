@@ -47,10 +47,11 @@ var $table = $('#table'),
     $update = $('#update');
     $(function () {
       $update.click(function () {
-        var ids = $.map($table.bootstrapTable('getSelections'), function (row) {
-            return row.id;
-        });
-        if(ids > 0) {
+        var data=$table.bootstrapTable('getSelections');
+        if(data.length==1) {
+          document.getElementById("id_author").value=data[0].id;
+          document.getElementById("first_name_author").value=data[0].first_name;
+          document.getElementById("last_name_author").value=data[0].last_name;
           $('#update_modal').modal('show');
         }
       });
