@@ -8,6 +8,7 @@
 <link href="../static/css/bootstrap.min.css" rel="stylesheet">
 <link href="../static/css/datepicker3.css" rel="stylesheet">
 <link href="../static/css/styles.css" rel="stylesheet">
+<link href="../static/css/bootstrap-table.css" rel="stylesheet">
 
 <!--Icons-->
 <script src="../static/js/lumino.glyphs.js"></script>
@@ -100,41 +101,58 @@
 
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Agregar Autor</h1>
+				<h1 class="page-header">Autores</h1>
 			</div>
 		</div><!--/.row-->
 
     <div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading">Informacion Personal</div>
+					<div class="panel-heading">Advanced Table</div>
 					<div class="panel-body">
-						<div class="col-md-12">
-							<div id="alerts_author"></div>
-							<form class="form-inline" id="author-form">
-								<div class="form-group">
-									<label>Nombre</label>
-									<input class="form-control" placeholder="Nombre" type="text" name="first_name" id="first_name_author">
-								</div>
+						<div id="toolbar">
+		            <button id="delete" class="btn btn-danger">Borrar</button>
+		        </div>
 
-                <div class="form-group">
-									<label>Apellido</label>
-									<input class="form-control" placeholder="Apellido" type="text" name="last_name" id="last_name_author">
-								</div>
-
-								<button type="submit" class="btn btn-primary">Agregar</button>
-							</div>
-						</form>
+						<table id="table" data-toggle="table"  data-toolbar="#toolbar" data-url="../../controllers/author/list.php"  data-search="true"  data-pagination="true" data-sort-name="first_name" >
+							<thead>
+						    <tr>
+										<th data-field="state" data-checkbox="true"></th>
+						        <th data-field="id" data-align="right">Item ID</th>
+						        <th data-field="first_name">Nombre</th>
+						        <th data-field="last_name">Apellido</th>
+						    </tr>
+						    </thead>
+						</table>
 					</div>
 				</div>
-			</div><!-- /.col-->
-		</div><!-- /.row -->
+			</div>
+		</div><!--/.row-->
 
 	</div>	<!--/.main-->
+
+	<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="gridSystemModalLabel">Confirmar Borrado</h4>
+	      </div>
+	      <div class="modal-body">
+	          <p>Esta seguro que desea eliminar estos registros</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-danger" id="delete_confirm">Borrar</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 
 	<script src="../static/js/jquery-1.11.1.min.js"></script>
 	<script src="../static/js/bootstrap.min.js"></script>
 	<script src="../static/js_views/author.js"></script>
+  <script src="../static/js/bootstrap-table.js"></script>
 	<script>
 
 		!function ($) {
@@ -150,6 +168,35 @@
 		$(window).on('resize', function () {
 		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
 		})
+	</script>
+	<script type="text/javascript">
+	var $table = $('#table'),
+			$delete = $('#delete');
+			$(function () {
+        $delete.click(function () {
+            var ids = $.map($table.bootstrapTable('getSelections'), function (row) {
+                return row.id;
+            });
+						$('#myModal').modal('show');
+						$('#delete_confirm').click(function(){
+							var jsonString = JSON.stringify(ids);
+							console.log(jsonString);
+						   $.ajax({
+						        type: "POST",
+						        url: "../../controllers/author/delete.php",
+						        data: {data : jsonString},
+						        success: function(data){
+						            // console.log(data);
+						        }
+						    });
+							$('#myModal').modal('hide');
+							$table.bootstrapTable('remove', {
+	                field: 'id',
+	                values: ids
+	            });
+						});
+        });
+    });
 	</script>
 </body>
 

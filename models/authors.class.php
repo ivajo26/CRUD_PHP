@@ -24,7 +24,7 @@ class Author{
   function read_all(){
     $sql = $this->db->prepare("SELECT * FROM author");
     $sql->execute();
-    return $sql;
+    return $sql->fetchAll();
   }
 
   function read_for_id($id){
@@ -42,7 +42,11 @@ class Author{
     $sql->execute();
   }
 
-  function delete($id){}
+  function delete($id){
+    $sql = $this->db->prepare("DELETE FROM author WHERE id = ? ");
+    $sql->bindParam(1, $id);
+    $sql->execute();
+  }
 }
 
 ?>
