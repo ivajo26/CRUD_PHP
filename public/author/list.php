@@ -112,8 +112,8 @@
 					<div class="panel-body">
 						<div id="toolbar">
 		            <button id="delete" class="btn btn-danger">Borrar</button>
+								<button id="update" class="btn btn-primary">Editar</button>
 		        </div>
-
 						<table id="table" data-toggle="table"  data-toolbar="#toolbar" data-url="../../controllers/author/list.php"  data-search="true"  data-pagination="true" data-sort-name="first_name" >
 							<thead>
 						    <tr>
@@ -131,7 +131,7 @@
 
 	</div>	<!--/.main-->
 
-	<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+	<div id="delete_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -149,10 +149,41 @@
 	  </div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
 
+	<div id="update_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="gridSystemModalLabel">Actualizar</h4>
+				</div>
+				<div class="modal-body">
+					<div id="alerts_author"></div>
+					<form class="form-inline" id="author-form">
+						<div class="form-group">
+							<label>Nombre</label>
+							<input class="form-control" placeholder="Nombre" type="text" name="first_name" id="first_name_author">
+						</div>
+
+						<div class="form-group">
+							<label>Apellido</label>
+							<input class="form-control" placeholder="Apellido" type="text" name="last_name" id="last_name_author">
+						</div>
+
+						<input type="numbre" name="id" hidden value="25">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Actualizar</button>
+				</div>
+				</form>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
 	<script src="../static/js/jquery-1.11.1.min.js"></script>
 	<script src="../static/js/bootstrap.min.js"></script>
-	<script src="../static/js_views/author.js"></script>
   <script src="../static/js/bootstrap-table.js"></script>
+	<script src="../static/js_views/author.js"></script>
 	<script>
 
 		!function ($) {
@@ -170,33 +201,7 @@
 		})
 	</script>
 	<script type="text/javascript">
-	var $table = $('#table'),
-			$delete = $('#delete');
-			$(function () {
-        $delete.click(function () {
-            var ids = $.map($table.bootstrapTable('getSelections'), function (row) {
-                return row.id;
-            });
-						$('#myModal').modal('show');
-						$('#delete_confirm').click(function(){
-							var jsonString = JSON.stringify(ids);
-							console.log(jsonString);
-						   $.ajax({
-						        type: "POST",
-						        url: "../../controllers/author/delete.php",
-						        data: {data : jsonString},
-						        success: function(data){
-						            // console.log(data);
-						        }
-						    });
-							$('#myModal').modal('hide');
-							$table.bootstrapTable('remove', {
-	                field: 'id',
-	                values: ids
-	            });
-						});
-        });
-    });
+
 	</script>
 </body>
 

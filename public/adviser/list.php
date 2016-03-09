@@ -8,6 +8,7 @@
 <link href="../static/css/bootstrap.min.css" rel="stylesheet">
 <link href="../static/css/datepicker3.css" rel="stylesheet">
 <link href="../static/css/styles.css" rel="stylesheet">
+<link href="../static/css/bootstrap-table.css" rel="stylesheet">
 
 <!--Icons-->
 <script src="../static/js/lumino.glyphs.js"></script>
@@ -100,41 +101,88 @@
 
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">Agregar Asesor</h1>
+				<h1 class="page-header">Autores</h1>
 			</div>
 		</div><!--/.row-->
 
     <div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading">Informacion Personal</div>
+					<div class="panel-heading">Advanced Table</div>
 					<div class="panel-body">
-						<div class="col-md-12">
-							<div id="alerts_adviser"></div>
-							<form class="form-inline" id="adviser-form">
-								<div class="form-group">
-									<label>Nombre</label>
-									<input class="form-control" placeholder="Nombre" type="text" name="first_name" id="first_name_adviser">
-								</div>
-
-                <div class="form-group">
-									<label>Apellido</label>
-									<input class="form-control" placeholder="Apellido" type="text" name="last_name" id="last_name_adviser">
-								</div>
-
-								<button type="submit" class="btn btn-primary">Agregar</button>
-							</div>
-						</form>
+						<div id="toolbar">
+		            <button id="delete" class="btn btn-danger">Borrar</button>
+								<button id="update" class="btn btn-primary">Editar</button>
+		        </div>
+						<table id="table" data-toggle="table"  data-toolbar="#toolbar" data-url="../../controllers/adviser/list.php"  data-search="true"  data-pagination="true" data-sort-name="first_name" >
+							<thead>
+						    <tr>
+										<th data-field="state" data-checkbox="true"></th>
+						        <th data-field="id" data-align="right">Item ID</th>
+						        <th data-field="first_name">Nombre</th>
+						        <th data-field="last_name">Apellido</th>
+						    </tr>
+						    </thead>
+						</table>
 					</div>
 				</div>
-			</div><!-- /.col-->
-		</div><!-- /.row -->
+			</div>
+		</div><!--/.row-->
 
 	</div>	<!--/.main-->
 
+	<div id="delete_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="gridSystemModalLabel">Confirmar Borrado</h4>
+	      </div>
+	      <div class="modal-body">
+	          <p>Esta seguro que desea eliminar estos registros</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-danger" id="delete_confirm">Borrar</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<div id="update_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="gridSystemModalLabel">Actualizar</h4>
+				</div>
+				<div class="modal-body">
+					<div id="alerts_adviser"></div>
+					<form class="form-inline" id="adviser-form">
+						<div class="form-group">
+							<label>Nombre</label>
+							<input class="form-control" placeholder="Nombre" type="text" name="first_name" id="first_name_adviser">
+						</div>
+
+						<div class="form-group">
+							<label>Apellido</label>
+							<input class="form-control" placeholder="Apellido" type="text" name="last_name" id="last_name_adviser">
+						</div>
+
+						<input type="numbre" name="id" hidden value="25">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Actualizar</button>
+				</div>
+				</form>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
 	<script src="../static/js/jquery-1.11.1.min.js"></script>
 	<script src="../static/js/bootstrap.min.js"></script>
-	<script src="../static/js/bootstrap-table.js"></script>
+  <script src="../static/js/bootstrap-table.js"></script>
 	<script src="../static/js_views/adviser.js"></script>
 	<script>
 
@@ -151,6 +199,9 @@
 		$(window).on('resize', function () {
 		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
 		})
+	</script>
+	<script type="text/javascript">
+
 	</script>
 </body>
 

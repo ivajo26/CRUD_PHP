@@ -134,6 +134,7 @@
 
 	<script src="../static/js/jquery-1.11.1.min.js"></script>
 	<script src="../static/js/bootstrap.min.js"></script>
+	<script src="../static/js/bootstrap-table.js"></script>
 	<script src="../static/js_views/author.js"></script>
 	<script>
 
