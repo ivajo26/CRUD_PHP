@@ -15,17 +15,13 @@ if(!ereg("^[A-Za-z\s]+$",$name) and !ereg("^[A-Za-z\s]+$",$line) ){
   if (isset($_POST['id'])) {
     if($project->update($first_name, $last_name,$id)){
       $json = array('status'=> "True" );
+    }else{
+      $json = array('status'=> "Faile" );
     }
+  }else if($project->create($name, $id_adviser,$note,$line,$author)){
+    $json = array('status'=> "True" );
   }else{
-    $project->create($name, $id_adviser,$note,$line,$author);
-    $json = array('status'=> "Hasta aqui vamos cool" );
-    // if($create[0]==true){
-    //   foreach ($author as $value) {
-    //     if ($value!=null) {
-    //       $project->save_author($create[1], $value);
-    //     }
-    //   }
-    // }
+      $json = array('status'=> "Faile" );
   }
 }else{
   $json = array('status'=> "False" );
