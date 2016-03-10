@@ -15,9 +15,9 @@ $.ajax({
   success: function(json){
     data = JSON.parse(json);
     for (var i = 0; i < data.length; i++) {
-      document.getElementsByName("author")[0].innerHTML+='<option value="'+data[i].id+'">'+data[i].first_name+' '+data[i].last_name+'</option>';
-      document.getElementsByName("author")[1].innerHTML+='<option value="'+data[i].id+'">'+data[i].first_name+' '+data[i].last_name+'</option>';
-      document.getElementsByName("author")[2].innerHTML+='<option value="'+data[i].id+'">'+data[i].first_name+' '+data[i].last_name+'</option>';
+      document.getElementsByName("author[]")[0].innerHTML+='<option value="'+data[i].id+'">'+data[i].first_name+' '+data[i].last_name+'</option>';
+      document.getElementsByName("author[]")[1].innerHTML+='<option value="'+data[i].id+'">'+data[i].first_name+' '+data[i].last_name+'</option>';
+      document.getElementsByName("author[]")[2].innerHTML+='<option value="'+data[i].id+'">'+data[i].first_name+' '+data[i].last_name+'</option>';
     }
   }
 });
@@ -60,7 +60,7 @@ $( "#project-form" ).submit(function(event) {
     errors+=1;
   }
 
-  var field = document.getElementsByName("author");
+  var field = document.getElementsByName("author[]");
   var isnull = true;
   var isrepeat = false;
   for(var i = 0; i < field.length; i++){
@@ -91,24 +91,25 @@ $( "#project-form" ).submit(function(event) {
     }
     errors+=1;
   }
-  console.log($("#project-form").serialize());
+  // console.log($("#project-form").serialize());
   if(errors==0){
     $.ajax({
       type: "POST",
-      url: "../../controllers/adviser/add.php",
+      url: "../../controllers/project/add.php",
       data: $("#project-form").serialize(), // Adjuntar los campos del formulario enviado.
       success: function(json){
         data = JSON.parse(json);
-        $table.bootstrapTable('refresh');
-        $('#update_modal').modal('hide');
-        if(data['status']=="True"){
-          document.getElementById("alerts_adviser").innerHTML+='<div class="alert bg-success" role="alert"><svg class="glyph stroked checkmark"><use xlink:href="#stroked-checkmark"></use></svg> El autor se ha añadido correctamete</span></a></div>';
-          document.getElementById("adviser-form").reset();
-        }else if (data['status']=="True") {
-          document.getElementById("alerts_adviser").innerHTML+='<div class="alert bg-warning" role="alert"><svg class="glyph stroked flag"><use xlink:href="#stroked-flag"></use></svg> Se han añadido mal los campos</span></a></div>';
-        }else if (data['status']=="Faile") {
-            document.getElementById("alerts_adviser").innerHTML+='<div class="alert bg-danger" role="alert"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>Error en el servidor, estamos trabajando para corregirlo</span></a></div>';
-        }
+        console.log(data);
+        // $table.bootstrapTable('refresh');
+        // $('#update_modal').modal('hide');
+        // if(data['status']=="True"){
+        //   document.getElementById("alerts_adviser").innerHTML+='<div class="alert bg-success" role="alert"><svg class="glyph stroked checkmark"><use xlink:href="#stroked-checkmark"></use></svg> El autor se ha añadido correctamete</span></a></div>';
+        //   document.getElementById("adviser-form").reset();
+        // }else if (data['status']=="True") {
+        //   document.getElementById("alerts_adviser").innerHTML+='<div class="alert bg-warning" role="alert"><svg class="glyph stroked flag"><use xlink:href="#stroked-flag"></use></svg> Se han añadido mal los campos</span></a></div>';
+        // }else if (data['status']=="Faile") {
+        //     document.getElementById("alerts_adviser").innerHTML+='<div class="alert bg-danger" role="alert"><svg class="glyph stroked cancel"><use xlink:href="#stroked-cancel"></use></svg>Error en el servidor, estamos trabajando para corregirlo</span></a></div>';
+        // }
       }
     });
   }
