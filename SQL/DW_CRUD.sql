@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1
+-- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 06, 2016 at 07:22 PM
--- Server version: 10.0.21-MariaDB
--- PHP Version: 5.6.18
+-- Generation Time: Mar 11, 2016 at 12:57 AM
+-- Server version: 5.5.47-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `DW_CRUD`
@@ -26,11 +26,12 @@ SET time_zone = "+00:00";
 -- Table structure for table `adviser`
 --
 
-CREATE TABLE `adviser` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `adviser` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `last_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `last_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -38,11 +39,14 @@ CREATE TABLE `adviser` (
 -- Table structure for table `author`
 --
 
-CREATE TABLE `author` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `author` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `last_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `last_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `id_project` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_project` (`id_project`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -50,98 +54,32 @@ CREATE TABLE `author` (
 -- Table structure for table `projects`
 --
 
-CREATE TABLE `projects` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `projects` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `id_adviser` int(11) NOT NULL,
   `date_add` date NOT NULL,
   `note` float NOT NULL,
-  `investigation_line` varchar(200) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `investigation_line` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_adviser` (`id_adviser`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `propierty_projects`
---
-
-CREATE TABLE `propierty_projects` (
-  `id` int(11) NOT NULL,
-  `id_author` int(11) NOT NULL,
-  `id_project` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `adviser`
---
-ALTER TABLE `adviser`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `author`
---
-ALTER TABLE `author`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `projects`
---
-ALTER TABLE `projects`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_adviser` (`id_adviser`);
-
---
--- Indexes for table `propierty_projects`
---
-ALTER TABLE `propierty_projects`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_project` (`id_project`),
-  ADD KEY `id_adviser` (`id_author`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `adviser`
---
-ALTER TABLE `adviser`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `author`
---
-ALTER TABLE `author`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `projects`
---
-ALTER TABLE `projects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `propierty_projects`
---
-ALTER TABLE `propierty_projects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `author`
+--
+ALTER TABLE `author`
+  ADD CONSTRAINT `author_ibfk_1` FOREIGN KEY (`id_project`) REFERENCES `projects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `projects`
 --
 ALTER TABLE `projects`
   ADD CONSTRAINT `projects_ibfk_1` FOREIGN KEY (`id_adviser`) REFERENCES `adviser` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `propierty_projects`
---
-ALTER TABLE `propierty_projects`
-  ADD CONSTRAINT `propierty_projects_ibfk_1` FOREIGN KEY (`id_author`) REFERENCES `author` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `propierty_projects_ibfk_2` FOREIGN KEY (`id_project`) REFERENCES `projects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
